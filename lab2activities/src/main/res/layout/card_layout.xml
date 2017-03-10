@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view"
+    android:layout_margin="2dp"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="0dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true"
+    card_view:cardBackgroundColor="@android:color/holo_blue_dark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp" >
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/item_image"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_title"
+            android:layout_toRightOf="@+id/item_image"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_detail"
+            android:layout_toRightOf="@+id/item_image"
+            android:layout_below="@+id/item_title"
+            />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_puntos"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+            android:clickable="false"
+            android:scaleX="1.9"
+            android:scaleY="1.9"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/item_detail"
+            android:layout_toRightOf="@+id/item_image"
+            android:progressTint="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_id"
+            android:visibility="visible"
+            />
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

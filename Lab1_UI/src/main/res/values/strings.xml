@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name1">Información Personal</string>
+    <string name="app_name2">Información Complementaria</string>
+    <string name="app_name3">Información del Contacto</string>
+    <string-array name="escolaridad">
+        <item>Primaria</item>
+        <item>Secundaria</item>
+        <item>Universidad</item>
+        <item>Otro</item>
+    </string-array>
+    <string name="grado_escolaridad">Grado escolaridad</string>
+</resources>
