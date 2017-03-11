@@ -53,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             valores.put(DataBase.column_user.USER, user); //se insertan los ṕares de elementos: clave-valor
             valores.put(DataBase.column_user.PASSWORD, pass);
             valores.put(DataBase.column_user.EMAIL, email);
+            valores.put(DataBase.column_user.STATUS, "DISABLE");
 
             //validaciones
 

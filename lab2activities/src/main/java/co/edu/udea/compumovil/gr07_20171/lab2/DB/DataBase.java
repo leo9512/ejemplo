@@ -16,6 +16,8 @@ public class DataBase {
         public static final String PASSWORD= "password";
         public static final String AGE= "age";
         public static final String PHOTO_USER= "photo_user";
+        public static final String STATUS= "status";
+
     }
 
     public class column_event{

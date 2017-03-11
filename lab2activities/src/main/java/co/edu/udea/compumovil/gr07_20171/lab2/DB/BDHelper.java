@@ -19,14 +19,16 @@ public class BDHelper extends SQLiteOpenHelper {
                                                                  "%s text,"+
                                                                  "%s text,"+
                                                                  "%s int,"+
-                                                                 "%s blob);",
+                                                                 "%s blob,"+
+                                                                 "%s text);",
                                                                   DataBase.TABLE_USER,
                                                                   DataBase.column_user.ID,
                                                                   DataBase.column_user.USER,
                                                                   DataBase.column_user.EMAIL,
                                                                   DataBase.column_user.PASSWORD,
                                                                   DataBase.column_user.AGE,
-                                                                  DataBase.column_user.PHOTO_USER);
+                                                                  DataBase.column_user.PHOTO_USER,
+                                                                  DataBase.column_user.STATUS);
         db.execSQL(create_table_user);
 
         //se crea tabla para eventos

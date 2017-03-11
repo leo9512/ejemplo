@@ -18,8 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import co.edu.udea.compumovil.gr07_20171.lab2.DB.BDHelper;
+import co.edu.udea.compumovil.gr07_20171.lab2.DB.DataBase;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.about;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.event;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.event_detail;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.login;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.new_event_fragment;
+import co.edu.udea.compumovil.gr07_20171.lab2.Fragments.profile;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RecyclerAdapter.OnHeadlineSelectedListener {
@@ -28,11 +34,10 @@ public class MainActivity extends AppCompatActivity
     private FragmentTransaction ft;
     private Fragment fragment;
     private BDHelper dBHelper;
-    private SQLiteDatabase dataBase;
+    private SQLiteDatabase dBase;
     private FloatingActionButton fab;
     private Cursor cursorUser;
     private ContentValues valores;
-
 
 
     @Override
@@ -49,7 +54,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 fragmentManager = getSupportFragmentManager();
                 ft = fragmentManager.beginTransaction();
-                fragment = new NuevoLugarFragment();
+                fragment = new new_event_fragment();
                 ft.replace(R.id.fragmentContainer, fragment);
                 ft.commit();
                 fab.hide();
@@ -75,55 +80,52 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void verificarSesion(String etiqueta){
-        dBHelper = new BdHelper(this);
-        dataBase =  dBHelper.getWritableDatabase();
+        dBHelper = new BDHelper(this);
+        dBase =  dBHelper.getWritableDatabase();
 
-        cursorUser = dataBase.rawQuery("select * from " + BaseDeDatos.TABLE_USER + " where " + BaseDeDatos.Column_User.ESTAD0 + " = 'ACTIVO'", null);
+        cursorUser = dBase.rawQuery("select * from " + DataBase.TABLE_USER + " where " + DataBase.column_user.STATUS + " = 'ENABLE'", null);
 
         fragmentManager = getSupportFragmentManager();
         ft = fragmentManager.beginTransaction();
 
         if(cursorUser.moveToFirst()){
             //actualizar la imagem
-            if(etiqueta.equalsIgnoreCase("Lugares")){
-                fragment = new LugaresFragment();
+            if(etiqueta.equalsIgnoreCase("Events")){
+                fragment = new event();
                 fab.show();
-            }else if(etiqueta.equalsIgnoreCase("Perfil")){
-                fragment = new PerfilFragment();
+            }else if(etiqueta.equalsIgnoreCase("Profile")){
+                fragment = new profile();
                 fab.hide();
-            }else if(etiqueta.equalsIgnoreCase("Acerca")){
-                fragment = new AcercaDeFragment();
+            }else if(etiqueta.equalsIgnoreCase("About")){
+                fragment = new about();
                 fab.hide();
             }
 
         }else{
-            fragment = new LoginFragment();
+            fragment = new login();
             fab.hide();
         }
         ft.replace(R.id.fragmentContainer, fragment);
         ft.commit();
-        dataBase.close();
+        dBase.close();
     }
 
     private void cerrarSesion(){
-        dBHelper = new BdHelper(this);
-        dataBase =  dBHelper.getWritableDatabase();
-        cursorUser = dataBase.rawQuery("select * from " + BaseDeDatos.TABLE_USER + " where " + BaseDeDatos.Column_User.ESTAD0 + " = 'ACTIVO'", null);
+        dBHelper = new BDHelper(this);
+        dBase =  dBHelper.getWritableDatabase();
+        cursorUser = dBase.rawQuery("select * from " + DataBase.TABLE_USER + " where " + DataBase.column_user.STATUS + " = 'ACTIVO'", null);
         if(cursorUser.moveToFirst()){
-            String idUser = cursorUser.getString(cursorUser.getColumnIndex(BaseDeDatos.Column_User.ID));
+            String idUser = cursorUser.getString(cursorUser.getColumnIndex(DataBase.column_user.ID));
             valores = new ContentValues();
-            valores.put(BaseDeDatos.Column_User.ESTAD0,"INACTIVO");
-            dataBase.updateWithOnConflict(BaseDeDatos.TABLE_USER, valores, BaseDeDatos.Column_User.ID + "=" + idUser, null, SQLiteDatabase.CONFLICT_IGNORE);
-            Toast.makeText(this,"Finalizado",Toast.LENGTH_SHORT).show();
+            valores.put(DataBase.column_user.STATUS,"INACTIVO");
+            dBase.updateWithOnConflict(DataBase.TABLE_USER, valores, DataBase.column_user.ID + "=" + idUser, null, SQLiteDatabase.CONFLICT_IGNORE);
+            Toast.makeText(this,"Done",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,"Ya has cerrado sesión",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Closed session",Toast.LENGTH_SHORT).show();
         }
-        verificarSesion("Lugares");
+        verificarSesion("Events");
     }
 
-    public static void actualizarSesion(){
-        //this.verificarSesion("Lugares");
-    }
 
     @Override
     public void onBackPressed() {
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_drawer, menu);
         return true;
     }
 
@@ -148,10 +150,10 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
-            case R.id.opc_acercaDe:
-                verificarSesion("Acerca");
+            case R.id.opc_about:
+                verificarSesion("About");
                 break;
-            case R.id.opc_cerrarSesion:
+            case R.id.opc_signOut:
                 cerrarSesion();
                 break;
         }
@@ -161,18 +163,17 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //fab.show();
         switch (item.getItemId()){
-            case R.id.nav_lugares:
-                verificarSesion("Lugares");
+            case R.id.nav_events:
+                verificarSesion("Events");
                 break;
-            case R.id.nav_perfil:
-                verificarSesion("Perfil");
+            case R.id.nav_profile:
+                verificarSesion("Profile");
                 break;
-            case R.id.nav_acercaDe:
-                verificarSesion("Acerca");
+            case R.id.nav_about:
+                verificarSesion("About");
                 break;
-            case R.id.cerrarSesion:
+            case R.id.signOut:
                 cerrarSesion();
                 break;
 
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onArticleSelected(String datos[]) {
-        DetalleLugarFragment newFragment = new DetalleLugarFragment();
+        event_detail newFragment = new event_detail();
         newFragment.setDatos(datos);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.fragmentContainer, newFragment);
 
         transaction.addToBackStack(null);
-        //fab.hide();
+
 
         // Commit the transaction
         transaction.commit();
