@@ -13,42 +13,58 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private String[] titles;
     private String[] details;
     private byte[][] images;
-    private float[] puntos;
+    private float[] scores;
     String[] datos;
+    String[] dates;
+    String[] managers;
+    String[] locations;
     String [] ids;
-    public RecyclerAdapter(String[] titulos,String[] detalles, byte[][] imagenes,float[] puntuaciones, String [] i){
+    public RecyclerAdapter(String[] titulos,String[] detalles, byte[][] imagenes,float[] puntuaciones,String[] fechas,String[] administrador, String[] ubicaciones ,String [] i){
         titles=titulos;
         details=detalles;
         images=imagenes;
-        puntos=puntuaciones;
+        scores =puntuaciones;
+        dates= fechas;
+        managers= administrador;
+        locations=ubicaciones;
         ids = i;
-        datos = new String[6];
+        datos = new String[8];
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView itemImage;
         public TextView itemTitle;
-        public TextView itemDetail;
+        public TextView itemGeneral;
+        public TextView itemManager;
+        public TextView itemDate;
+        public TextView itemLocate;
         public RatingBar itemPuntos;
         public TextView IDs;
+
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemImage = (ImageView)itemView.findViewById(R.id.item_image);
             itemTitle = (TextView)itemView.findViewById(R.id.item_title);
-            itemDetail =(TextView)itemView.findViewById(R.id.item_detail);
+            itemGeneral =(TextView)itemView.findViewById(R.id.item_general);
+            itemManager =(TextView)itemView.findViewById(R.id.item_manager);
+            itemDate =(TextView)itemView.findViewById(R.id.item_date);
+            itemLocate =(TextView)itemView.findViewById(R.id.item_locate);
             itemPuntos =(RatingBar)itemView.findViewById(R.id.item_puntos);
             IDs = (TextView) itemView.findViewById(R.id.item_id);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     datos[0] = itemTitle.getText().toString();
-                    datos[1] = itemDetail.getText().toString();
-                    datos[2] = itemDetail.getText().toString();
-                    datos[3] = itemPuntos.getRating()+"";
-                    datos[4] = "sitios";
-                    datos[5] = IDs.getText().toString();
+                    datos[1] = itemGeneral.getText().toString();
+                    datos[2] = itemManager.getText().toString();
+                    datos[3] = itemDate.getText().toString();
+                    datos[4] = itemLocate.getText().toString();
+                    datos[5] = itemPuntos.getRating()+"";
+                    datos[6] = "Events";
+                    datos[7] = IDs.getText().toString();
                     mCallback.onArticleSelected(datos);
                 }
             });
@@ -84,11 +100,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.itemTitle.setText(titles[i]);
-        viewHolder.itemDetail.setText(details[i]);
-        //byte [] imagen = cursorPlace.getBlob(cursorPlace.getColumnIndex(BaseDeDatos.Column_Place.FOTO));
+        viewHolder.itemGeneral.setText(details[i]);
+        viewHolder.itemManager.setText(managers[i]);
+        viewHolder.itemDate.setText(dates[i]);
+        viewHolder.itemLocate.setText(locations[i]);
         Bitmap bmp = BitmapFactory.decodeByteArray(images[i],0,images[i].length);
         viewHolder.itemImage.setImageBitmap(bmp);
-        viewHolder.itemPuntos.setRating(puntos[i]);
+        viewHolder.itemPuntos.setRating(scores[i]);
         viewHolder.IDs.setText(ids[i]);
     }
 

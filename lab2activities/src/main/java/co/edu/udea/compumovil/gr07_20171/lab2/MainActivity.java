@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Toast.makeText(this,"=(",Toast.LENGTH_SHORT).show();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        verificarSesion("Lugares");
+        verificarSesion("Events");
     }
 
     @Override
@@ -113,11 +114,11 @@ public class MainActivity extends AppCompatActivity
     private void cerrarSesion(){
         dBHelper = new BDHelper(this);
         dBase =  dBHelper.getWritableDatabase();
-        cursorUser = dBase.rawQuery("select * from " + DataBase.TABLE_USER + " where " + DataBase.column_user.STATUS + " = 'ACTIVO'", null);
+        cursorUser = dBase.rawQuery("select * from " + DataBase.TABLE_USER + " where " + DataBase.column_user.STATUS + " = 'ENABLE'", null);
         if(cursorUser.moveToFirst()){
             String idUser = cursorUser.getString(cursorUser.getColumnIndex(DataBase.column_user.ID));
             valores = new ContentValues();
-            valores.put(DataBase.column_user.STATUS,"INACTIVO");
+            valores.put(DataBase.column_user.STATUS,"DISABLE");
             dBase.updateWithOnConflict(DataBase.TABLE_USER, valores, DataBase.column_user.ID + "=" + idUser, null, SQLiteDatabase.CONFLICT_IGNORE);
             Toast.makeText(this,"Done",Toast.LENGTH_SHORT).show();
         }else{

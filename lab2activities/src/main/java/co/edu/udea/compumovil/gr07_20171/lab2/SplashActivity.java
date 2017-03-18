@@ -23,15 +23,15 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
 
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
 
+                //new Intent(getApplicationContext(), MainActivity.class);
                 // inicia el Login
-                Intent mainIntent = new Intent().setClass(
-                        SplashActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(mainIntent);
-
                 // cierra la actividad para que no se pueda regresar a ella
                 finish();
             }

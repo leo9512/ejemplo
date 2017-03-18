@@ -11,7 +11,7 @@
     card_view:contentPadding="0dp"
     android:foreground="?selectableItemBackground"
     android:clickable="true"
-    card_view:cardBackgroundColor="@android:color/holo_blue_dark">
+    card_view:cardBackgroundColor="@color/colorBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,9 +39,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_detail"
+            android:id="@+id/item_general"
             android:layout_toRightOf="@+id/item_image"
             android:layout_below="@+id/item_title"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_manager"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_date"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_locate"
             />
 
         <RatingBar
@@ -55,7 +70,6 @@
             android:paddingBottom="5dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
-            android:layout_below="@+id/item_detail"
             android:layout_toRightOf="@+id/item_image"
             android:progressTint="@color/colorPrimary"/>
         <TextView

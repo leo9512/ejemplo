@@ -59,13 +59,16 @@
         android:background="@color/colorPrimary"
         android:id="@+id/btnLogin"
         android:layout_below="@+id/til_nombre3"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"/>
 
     <Button
         android:background="@android:color/transparent"
+        android:id="@+id/btnRegistrarse"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:text="Create account"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClick"/>
 
 </LinearLayout>

@@ -5,5 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="co.edu.udea.compumovil.gr07_20171.lab2.MainActivity">
+    <fragment
+        android:layout_width="384dp"
+        android:layout_height="511dp"
+        android:name="co.edu.udea.compumovil.gr07_20171.lab2.Fragments.login"
+        android:id="@+id/log"
+        tools:layout="@layout/fragment_login">
+    </fragment>
 
 </android.support.constraint.ConstraintLayout>

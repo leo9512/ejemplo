@@ -1,13 +1,110 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="co.edu.udea.compumovil.gr07_20171.lab2.Fragments.profile">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/linearPerfil"
+            tools:context="co.edu.udea.compumovil.gr07_20171.lab2.Fragments.profile"
+            android:background="@color/colorBackground">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+            <!-- TODO: Update blank fragment layout -->
 
-</FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btnAgregarFoto"
+                android:layout_toStartOf="@+id/btnAgregarFoto">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imgFotoUsuario"
+                    android:layout_gravity="center_horizontal|top"
+                    android:src="@drawable/avatar"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+
+                <ImageButton
+                    android:id="@+id/btnAgregarFotoUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/camera" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtUsuario"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:text="User"
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/txtValorUsuario"
+                    android:enabled="false"
+                    android:layout_height="wrap_content" />
+                <ImageButton
+                    android:layout_width="51dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnImgUsuario"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/editar"
+                    android:layout_weight="0.04" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textSize="25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/txtValorEdad"
+                    android:inputType="number"
+                    android:enabled="false"
+                    android:layout_height="wrap_content" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnImgEdad"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/editar"
+                    android:layout_weight="0.12" />
+
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:id="@+id/btnActualizarPerfil"
+                android:layout_gravity="right"
+                android:background="@color/colorPrimaryDark"/>
+
+
+
+
+
+        </LinearLayout>

@@ -20,6 +20,17 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+     <string name="informacionCurso">
+        El curso Computación Móvil introduce los conceptos
+        básicos acerca del diseño y desarrollo de aplicaciones
+        móviles. En el curso se tratan temas generales de
+        computación móvil como arquitectura de dispositivos
+        móviles y temas particulares en el desarrollo de
+        aplicaciones en Android referentes a la arquitectura
+        de software, manejo del framework de programación
+        Android studio y desarrollo de interfaces de usuario
+        utilizando Material Design.
+    </string>
 
     <string name="action_settings">Settings</string>
 </resources>
